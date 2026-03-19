@@ -9,7 +9,7 @@
   onClickFavorite: Function,
 })
 
-
+const base = import.meta.env.BASE_URL
 </script>
 
 <template>
@@ -18,7 +18,7 @@
   >
     <img
       v-if="onClickFavorite"
-      :src="!isFavorite ? '/like-1.svg' : '/like-2.svg'"
+      :src="!isFavorite ? `${base}like-1.svg` : `${base}like-2.svg`"
       alt="like 1"
       class="absolute top-8 left-8"
       @click="onClickFavorite"
@@ -32,7 +32,7 @@
         <span class="text-slate-400">Цена: </span>
         <b>{{ price }} руб.</b>
       </div>
-      <img v-if="onClickAdd" @click="onClickAdd" :src="!isAdded ? '/plus.svg' : '/checked.svg'" alt="plus" />
+      <img v-if="onClickAdd" @click="onClickAdd" :src="!isAdded ? `${base}plus.svg` : `${base}checked.svg`" alt="plus" />
     </div>
   </div>
 </template>

@@ -5,6 +5,7 @@ import debounce from 'lodash.debounce'
 import { inject } from 'vue'
 
 const { cart, addToCart, removeFromCart} = inject('cart')
+const base = import.meta.env.BASE_URL
 
 const items = ref([])
 
@@ -154,7 +155,7 @@ watch(filters, fetchItems)
           </select>
 
           <div class="relative">
-            <img class="absolute left-3 top-3" src="/search.svg" />
+            <img class="absolute left-3 top-3" :src="`${base}search.svg`" />
             <input
               @input="onChangeSearchInput"
               class="border rounded-md py-2 pl-11 pr-4 outline-none focus:border-gray-400"

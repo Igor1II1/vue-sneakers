@@ -1,7 +1,7 @@
 <script setup>
 
 const emit = defineEmits(['onClickRemove'])
-
+const base = import.meta.env.BASE_URL
 
 defineProps({
   id:Number,
@@ -21,7 +21,7 @@ defineProps({
         <img
           @click="emit('onClickRemove')"
           class="opacity-40 hover:opacity-100 cursor-pointer transition"
-          src="../../public/close.svg"
+          :src="`${base}close.svg`"
           alt="close"
         />
       </div>

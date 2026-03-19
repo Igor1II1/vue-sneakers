@@ -4,6 +4,8 @@ import CartItemList from './CartItemList.vue'
 import DrawerHead from './DrawerHead.vue'
 import InfoBlock from './InfoBlock.vue'
 
+const base = import.meta.env.BASE_URL
+
  const props = defineProps({
   totalPrice: Number,
   vatPrice :Number,
@@ -60,14 +62,14 @@ const buttonDisabled = computed(()=>isCreating.value || cartIsEmpty.value)
        v-if="!totalPrice && !orderId"  
        title="Корзина пустая" 
        description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
-        image-url="/package-icon.png"
+        :image-url="`${base}package-icon.png`"
         />
 
       <InfoBlock  
       v-if="orderId"
        title="Заказ оформлен" 
        :description="`Ваш заказ #${orderId} скоро будет передан курьерской доставке`" 
-       image-url="/order-success-icon.png"
+       :image-url="`${base}order-success-icon.png`"
        />
 
         </div>
