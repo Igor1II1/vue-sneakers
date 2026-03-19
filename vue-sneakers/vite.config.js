@@ -8,7 +8,7 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), vueJsx(), tailwindcss()],
-  base: '/',
+  base: '/Vue-Sneakers/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

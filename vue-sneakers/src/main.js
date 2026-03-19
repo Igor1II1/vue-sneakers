@@ -1,6 +1,6 @@
 import './assets/main.css'
 import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
-import { createRouter,createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { createApp } from 'vue'
 import App from './App.vue'
 import Home from './pages/Home.vue'
@@ -15,7 +15,7 @@ const routes =[
 
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 })
 

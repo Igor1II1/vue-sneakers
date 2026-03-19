@@ -104,7 +104,7 @@ let allItems = []
 const fetchItems = async () => {
   try {
     if (allItems.length === 0) {
-      const res = await fetch('/items.json')
+      const res = await fetch(`${import.meta.env.BASE_URL}items.json`)
       allItems = await res.json()
     }
 

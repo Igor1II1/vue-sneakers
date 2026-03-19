@@ -7,7 +7,7 @@ const favorites = ref([])
 onMounted(async () => {
   try {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]')
-    const res = await fetch('/items.json')
+    const res = await fetch(`${import.meta.env.BASE_URL}items.json`)
     const allItems = await res.json()
     favorites.value = allItems.filter(item =>
       savedFavorites.some(f => f.item_id === item.id)
