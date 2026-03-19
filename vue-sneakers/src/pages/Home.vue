@@ -125,6 +125,7 @@ const fetchItems = async () => {
 
     items.value = filtered.map((obj) => ({
       ...obj,
+      imageUrl: `${import.meta.env.BASE_URL}${obj.imageUrl}`,
       isFavorite: false,
       favoriteId: null,
       isAdded: false,

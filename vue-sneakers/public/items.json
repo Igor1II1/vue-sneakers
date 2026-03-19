@@ -3,72 +3,72 @@
     "id": 1,
     "title": "Nike Blazer Mid Suede Green",
     "price": 12999,
-    "imageUrl": "/sneakers/sneakers-1.jpg"
+    "imageUrl": "sneakers/sneakers-1.jpg"
   },
   {
     "id": 2,
     "title": "Nike Air Max 270",
     "price": 15600,
-    "imageUrl": "/sneakers/sneakers-2.jpg"
+    "imageUrl": "sneakers/sneakers-2.jpg"
   },
   {
     "id": 3,
     "title": "Nike Blazer Mid Suede Beige",
     "price": 11800,
-    "imageUrl": "/sneakers/sneakers-3.jpg"
+    "imageUrl": "sneakers/sneakers-3.jpg"
   },
   {
     "id": 4,
     "title": "Puma Future Rider Play On",
     "price": 8990,
-    "imageUrl": "/sneakers/sneakers-4.jpg"
+    "imageUrl": "sneakers/sneakers-4.jpg"
   },
   {
     "id": 5,
     "title": "Under Armour Curry 8",
     "price": 13200,
-    "imageUrl": "/sneakers/sneakers-5.jpg"
+    "imageUrl": "sneakers/sneakers-5.jpg"
   },
   {
     "id": 6,
     "title": "Nike Kyrie 7",
     "price": 14700,
-    "imageUrl": "/sneakers/sneakers-6.jpg"
+    "imageUrl": "sneakers/sneakers-6.jpg"
   },
   {
     "id": 7,
     "title": "Jordan Air CMFT Low",
     "price": 11500,
-    "imageUrl": "/sneakers/sneakers-7.jpg"
+    "imageUrl": "sneakers/sneakers-7.jpg"
   },
   {
     "id": 8,
     "title": "Nike LeBron 18",
     "price": 16400,
-    "imageUrl": "/sneakers/sneakers-8.jpg"
+    "imageUrl": "sneakers/sneakers-8.jpg"
   },
   {
     "id": 9,
     "title": "Nike LeBron 18 Low Summer Refresh",
     "price": 13900,
-    "imageUrl": "/sneakers/sneakers-9.jpg"
+    "imageUrl": "sneakers/sneakers-9.jpg"
   },
   {
     "id": 10,
     "title": "Nike Kyrie Flytrap IV Volt",
     "price": 10500,
-    "imageUrl": "/sneakers/sneakers-10.jpg"
+    "imageUrl": "sneakers/sneakers-10.jpg"
   },
   {
     "id": 11,
     "title": "Reebok Club C 85",
     "price": 8450,
-    "imageUrl": "/sneakers/sneakers-11.jpg"
+    "imageUrl": "sneakers/sneakers-11.jpg"
   },
   {
     "id": 12,
     "title": "Puma Suede Classic Red",
     "price": 7900,
-    "imageUrl": "/sneakers/sneakers-12.jpg"
+    "imageUrl": "sneakers/sneakers-12.jpg"
   }
 ]

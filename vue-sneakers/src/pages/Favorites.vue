@@ -9,9 +9,9 @@ onMounted(async () => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]')
     const res = await fetch(`${import.meta.env.BASE_URL}items.json`)
     const allItems = await res.json()
-    favorites.value = allItems.filter(item =>
-      savedFavorites.some(f => f.item_id === item.id)
-    )
+    favorites.value = allItems
+      .filter(item => savedFavorites.some(f => f.item_id === item.id))
+      .map(item => ({ ...item, imageUrl: `${import.meta.env.BASE_URL}${item.imageUrl}` }))
   } catch (err) {
     console.log(err)
   }
