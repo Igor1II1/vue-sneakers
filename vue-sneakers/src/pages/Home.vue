@@ -2,7 +2,6 @@
 import { reactive, watch, ref, onMounted } from 'vue'
 import CardList from '../components/CardList.vue'
 import debounce from 'lodash.debounce'
-import axios from 'axios'
 import { inject } from 'vue'
 
 const { cart, addToCart, removeFromCart} = inject('cart')
@@ -35,29 +34,20 @@ const onChangeSearchInput = debounce((event) => {
 },300)
 
 
-const addToFavorite = async(item)=>{
-    try{
-      if(!item.isFavorite){
-        const obj ={
-        item_id: item.id,
-      };
-
-      item.isFavorite=true;
-
-      const { data } = await axios.post(`https://212518633187bd46.mokky.dev/favorites`, obj)
-      
-     item.favoriteId= data.id;
-      } else{
-        item.isFavorite = false;
-        
-        await axios.delete(`https://212518633187bd46.mokky.dev/favorites/${item.favoriteId}`)
-        item.favoriteId = null;
-        
-      }
-    } catch(err){
-      console.log(err)
-    }
+const addToFavorite = (item)=>{
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]')
+  if(!item.isFavorite){
+    item.isFavorite = true
+    item.favoriteId = Date.now()
+    favorites.push({ id: item.favoriteId, item_id: item.id })
+  } else {
+    item.isFavorite = false
+    const idx = favorites.findIndex(f => f.item_id === item.id)
+    if (idx !== -1) favorites.splice(idx, 1)
+    item.favoriteId = null
   }
+  localStorage.setItem('favorites', JSON.stringify(favorites))
+}
 
 
   onMounted(async () => {
@@ -69,7 +59,7 @@ const addToFavorite = async(item)=>{
   // запрос всех кросовок
   await fetchItems()
   // получение всех закладок
-  await fetchFavorites()
+  fetchFavorites()
 
    // при перезагрузке страницы сохранять зеленые галочки
   items.value = items.value.map((item)=>({
@@ -93,48 +83,50 @@ watch(cart, ()=>{
 
 
 
-  const fetchFavorites = async () => {
-  try {
-    const { data: favorites } = await axios.get(`https://212518633187bd46.mokky.dev/favorites`)
-    items.value = items.value.map((item) => {
-      const favorite = favorites.find((favorite) => favorite.item_id === item.id)
-
-      if (!favorite) {
-        return item
-      }
-      return {
-        ...item,
-        // состояние добавления товара
-        isFavorite: true,
-        favoriteId: favorite.id,
-      }
-    })
-    // console.log(items.value)
-  } catch (err) {
-    console.log(err)
-  }
+const fetchFavorites = () => {
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]')
+  items.value = items.value.map((item) => {
+    const favorite = favorites.find((f) => f.item_id === item.id)
+    if (!favorite) {
+      return item
+    }
+    return {
+      ...item,
+      isFavorite: true,
+      favoriteId: favorite.id,
+    }
+  })
 }
 
 
+let allItems = []
+
 const fetchItems = async () => {
   try {
-    const params = {
-      sortBy: filters.sortBy,
+    if (allItems.length === 0) {
+      const res = await fetch('/items.json')
+      allItems = await res.json()
     }
-    if (filters.searchQuery) {
-      params.title = `*${filters.searchQuery}*`
-    }
-    const { data } = await axios.get(`https://212518633187bd46.mokky.dev/items`, {
-      params,
-    })
 
-    items.value = data.map((obj) => ({
-      // копирует свойство объекта
+    let filtered = [...allItems]
+
+    if (filters.searchQuery) {
+      const q = filters.searchQuery.toLowerCase()
+      filtered = filtered.filter(item => item.title.toLowerCase().includes(q))
+    }
+
+    if (filters.sortBy === 'price') {
+      filtered.sort((a, b) => a.price - b.price)
+    } else if (filters.sortBy === '-price') {
+      filtered.sort((a, b) => b.price - a.price)
+    } else {
+      filtered.sort((a, b) => a.title.localeCompare(b.title))
+    }
+
+    items.value = filtered.map((obj) => ({
       ...obj,
-      // добавляет новое свойство
       isFavorite: false,
-      favoriteId:null,
-      // добавляет еще одно свойство
+      favoriteId: null,
       isAdded: false,
     }))
   } catch (err) {

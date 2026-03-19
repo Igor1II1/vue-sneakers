@@ -1,6 +1,5 @@
 <script setup>
-import axios from 'axios'
-import {  inject, ref,  computed} from 'vue'
+import { inject, ref, computed } from 'vue'
 import CartItemList from './CartItemList.vue'
 import DrawerHead from './DrawerHead.vue'
 import InfoBlock from './InfoBlock.vue'
@@ -22,14 +21,17 @@ const createOrder = async() => {
     // говорит о том, что заказ создан
     isCreating.value = true
     // Отмечаем что заказ отправляется.
-    const {data} = await axios.post(`https://212518633187bd46.mokky.dev/orders`,{
+    const orders = JSON.parse(localStorage.getItem('orders') || '[]')
+    const newOrder = {
+      id: Date.now(),
       items: cart.value,
-      totalPrice: props.totalPrice.value,
-    })
+      totalPrice: props.totalPrice,
+    }
+    orders.push(newOrder)
+    localStorage.setItem('orders', JSON.stringify(orders))
 
-    cart.value =[]
-  // Очищаем корзину.
-    orderId.value = data.id;
+    cart.value = []
+    orderId.value = newOrder.id
   }catch(err) {
     console.log(err)
   } finally {
