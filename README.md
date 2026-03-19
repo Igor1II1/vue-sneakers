@@ -6,6 +6,8 @@
 
 Стек: Vue 3, Vite, Tailwind CSS, Vue Router.
 
+Демо: https://igor1ii1.github.io/vue-sneakers/
+
 
 ## Структура репозитория
 
